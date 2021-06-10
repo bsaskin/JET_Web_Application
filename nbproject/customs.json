@@ -1,0 +1,34 @@
+{
+    "elements": {
+        "oj-label": {
+            "attributes": {
+                "for": {}
+            }
+        },
+        "oj-bind-if": {
+            "attributes": {
+                "test": {}
+            }
+        },
+        "oj-chart": {},
+        "oj-list-view": {
+            "attributes": {
+                "first-selected-item": {},
+                "scroll-policy": {},
+                "scroll-policy-options.fetch-size": {},
+                "data": {},
+                "selection": {},
+                "style": {},
+                "id": {},
+                "selection-mode": {},
+                "on-selection-changed": {}
+            }
+        },
+        "oj-bind-text": {
+            "attributes": {
+                "value": {}
+            }
+        }
+    },
+    "attributes": {}
+}

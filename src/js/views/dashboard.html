@@ -1,0 +1,99 @@
+<!--
+ Copyright (c) 2014, 2020, Oracle and/or its affiliates.
+ The Universal Permissive License (UPL), Version 1.0
+ -->
+ <div class="oj-hybrid-padding">
+  <h1>UK Area Corona Cases</h1>
+  <div class="oj-flex oj-flex-init">
+    <div class="oj-flex-item oj-md-4 oj-sm-12">
+      <h3><oj-label for="areaList">Areas</oj-label></h3>
+      <oj-list-view id="areaList" style="width:100%;height:500px;overflow-x:hidden" data="[[areaDataProvider]]"
+                    selection-mode="single" selection="{{selectedArea}}" on-selection-changed="[[selectedAreaChanged]]"
+                    first-selected-item="{{firstSelectedArea}}" scroll-policy="loadMoreOnScroll"
+                    scroll-policy-options.fetch-size="5">
+        <template slot="itemTemplate">
+          <div class="oj-flex" style="flex-wrap: nowrap">
+            <div class="demo-content oj-flex-item">
+              <div>
+                <strong>
+                  <oj-bind-text value="[[$current.data.areaName]]"></oj-bind-text>
+                </strong>
+              </div>
+            </div>
+          </div>
+        </template>
+      </oj-list-view> 
+    </div>
+    <oj-bind-if test="[[areaSelected()]]">
+      <div class="oj-flex oj-flex-item oj-flex-items-pad oj-md-8 oj-sm-12">
+        <div class="oj-flex-item oj-md-6 oj-sm-12">
+          <h3><oj-label for="dateList">Area Dates</oj-label></h3>
+              
+          <oj-list-view id="dateList" style="width:100%;height:500px;overflow-x:hidden" data="[[dateDataProvider]]"
+                        selection-mode="single" selection="{{selectedDate}}" on-selection-changed="[[selectedDateChanged]]"
+                        first-selected-item="{{firstSelectedDate}}" scroll-policy="loadMoreOnScroll"
+                        scroll-policy-options.fetch-size="5">
+            <template slot="itemTemplate">
+              <div class="oj-flex" style="flex-wrap: nowrap">
+                
+                <div class="demo-content oj-flex-item">
+                  <div>
+                    <strong>
+                      <oj-bind-text value="[[$current.data.date]]"></oj-bind-text>
+                    </strong>
+                  </div>
+                </div>
+              </div>
+            </template>
+          </oj-list-view>
+         
+        </div>
+        <oj-bind-if test="[[dateSelected()]]">
+          
+            <div class="oj-flex-item oj-sm-12 oj-md-6">
+            <h3><oj-label for="basicSelect">Date Details</oj-label></h3>
+            <hr style="margin-top:12px;">
+            
+            <div id="totalCasesText" style="font-size: 20px; font-weight: bolder;">
+              <oj-bind-text value="[['Total Cases Until Today: ' + caseDataSum()]]"></oj-bind-text>
+            </div>
+            
+            <div id="incRateText" style="font-size: 18px; font-weight: bolder;">
+              <oj-bind-text value="[['Weekly Increase Rate %: ' + caseDataIncRate()]]"></oj-bind-text>
+            </div>
+            
+            <div id="newCasesText" style="font-size: 15px; font-weight: bolder;">
+              <oj-bind-text value="[['New Cases Today: ' + dateData().newCasesByPublishDate]]"></oj-bind-text>
+            </div>
+            
+            <div id="preweekCasesText" style="font-size: 15px; font-weight: bolder;">
+              <oj-bind-text value="[['New Cases Same Day Previous Week: ' + caseDataPreWeek()]]"></oj-bind-text>
+            </div>
+            
+           
+            <br>
+             <div>   
+              <oj-chart type="bar" series="[[barSeriesValue]]" animation-on-display="auto"
+                        animation-on-data-change="auto" hover-behavior="dim"
+                        legend.position="bottom"
+                        style="max-width: 400px;width:100%;height:350px;">
+              </oj-chart>
+            </div>         
+          </div>
+            
+        </oj-bind-if>           
+        <oj-bind-if test="[[!dateSelected()]]">
+          <div class="oj-flex-item  oj-sm-12 oj-md-6">
+            <h4>Select an Date to see details</h4>
+          </div>
+        </oj-bind-if>
+      </div>
+    </oj-bind-if>
+          
+    <oj-bind-if test="[[!areaSelected()]]">
+      <div class="oj-flex-item oj-sm-6">
+        <h4>Select an Area to see Items</h4>
+      </div>
+    </oj-bind-if>
+  </div>
+  </div>
